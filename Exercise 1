@@ -1,0 +1,95 @@
+use Candies;
+
+-- 1.Display Customers: CustomerID, FirstName, LastName
+select CustomerID, Firstname, Lastname
+from Customers;
+
+-- 2.Modify the above query: display FirstName and LastName as a one
+-- column, separate them with comma and precede them by 'Mr/Mrs'.
+-- Name the column in the result set by Customer.
+
+
+SELECT CONCAT('Mr/Mrs ', FirstName, ' ', LastName) AS Customer
+FROM Customers;
+
+---- 3.Modify the above query: add in the result set another column.
+--   The new column should have a name email and should contain
+--   emails in the form of: pkowalski@candies.vistula (the first letter
+--   of the FirstName concatenated with LastName and domain name:
+--   '@canties.vistula'
+
+--SELECT CONCAT('Mr/Mrs ', FirstName, ' ', LastName, Lastname, '@canties.vistula') AS Customer
+--FROM Customers;
+
+SELECT CustomerID,
+'Mr/Mrs ' + Firstname ',' Lastname Customer + Lastname + '@canties.vistula'
+FROM Customers;
+
+
+ --4.Create a query: display text: 'Current date:' and in another
+ --  column current date using the appropriate function.
+
+ Select 'Current date: ', GETDATE()
+
+  --1.Display all the data from Employees table.
+  SELECT * FROM Employees;
+ 
+-- 2.Display EmployeeID, FirstName, LastName, and Bonus of all employees.
+ Select EmployeeID, Firstname, Lastname, Bonus
+from Employees;
+
+-- 3.Modify the above query: in addition, display the value of Bonus
+--   (should be calculated as Bonus multiplied by Salary).
+ Select EmployeeID, Firstname, Lastname, Bonus, Salary * Bonus
+from Employees;
+
+-- 4.Modify the above query: if there is not Bonus, the value of Bonus
+--   should be displayed as 0.
+
+ Select EmployeeID, Firstname, Lastname, Bonus, Salary *ISNULL(Bonus,0)
+from Employees;
+
+
+-----------------------------------------------------------------------
+-- 1.Display Customers: CustomerID, LastName, FirstName, and City.
+ 
+-- 2.Modify the above query: display only the customers from Warszawa.
+Select CustomerID, Lastname, Firstname, City
+from Customers where City = 'Warszawa' ;
+ 
+-- 3.Modify the above query: display customers from Krakow as well.
+Select CustomerID, Lastname, Firstname, City
+from Customers where City = 'Warszawa' or City = 'Krakow'; 
+ 
+-- 4.Modify the above query: display customers with firstName: Anna 
+--   from City of Augustow, all the customers from city of Warszawa as 
+--   well as all the customers with the firstName: Jacek.
+Select CustomerID, Lastname, Firstname, City
+from Customers where Firstname = 'Anna' or City = 'Augustow' or Firstname = 'Jacek'; 
+--or
+Select CustomerID, Lastname, Firstname, City
+from Customers where Firstname = 'Anna' AND City = 'Augustow' or City = 'Warszawa' or Firstname = 'Jacek'; 
+
+-- 5.Display all columns for customers with IDs greater than 25 and 
+--   smaller than 55.
+   Select * 
+   from Customers where CustomerID > 25 AND CustomerID <55
+   order by CustomerID asc;
+-- 6.Modify the above query: use the BETWEEN operator.
+ Select * 
+   from Customers where CustomerID BETWEEN 25 AND 54
+   order by CustomerID asc;
+-- TRYING BETWEEN FOR TEXT 
+    Select * 
+   from Customers where Firstname BETWEEN 'Jan' AND 'Krzystof'
+   order by Firstname asc;
+-----------------------------------------------------------------------
+-- 1.Using the OR operator display customers from Cities: Warszawa, 
+--   Krakow, Opole.
+SELECT * 
+FROM Customers where ='Warszawa' OR CITY ='Krakow' OR CITY ='Opole'
+
+-- 2.Modify the above query: use IN operator. 
+-----------------------------------------------------------------------
+SELECT * 
+FROM Customers where CITY IN('Warszawa', 'Krakow', 'Opole');
